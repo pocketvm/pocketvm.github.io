@@ -37,7 +37,7 @@ $('start').onclick = async () => {
       bios:{url:'vendor/seabios.bin'}, vga_bios:{url:'vendor/vgabios.bin'}, autostart:false,
     };
     if (local) { options[$('kind').value] = {buffer:await file.arrayBuffer()}; }
-    else { options.cdrom = {url:'https://i.copy.sh/linux.iso'}; }
+    else { options.cdrom = {url:'images/linux.iso'}; }
     const machine = new V86(options); vm = machine;
     machine.keyboard_set_enabled(false); machine.mouse_set_enabled(false);
     $('machine-name').textContent = local ? file.name : 'Linux demo / x86';
@@ -47,7 +47,13 @@ $('start').onclick = async () => {
       if (vm !== machine) return;
       $('message').textContent = e.total ? `Loading ${Math.min(100,Math.round(e.loaded/e.total*100))}% · file ${e.file_index+1}/${e.file_count}` : 'Loading machine files…';
     });
-    machine.add_listener('download-error', () => { if (vm === machine) void fail(new Error('A machine file could not load. Check your connection and try again.')); });
+    machine.add_listener('download-error', e => {
+      if (vm !== machine) return;
+      const fileName = (e.file_name || 'machine file').split('/').pop();
+      const status = e.request?.status;
+      const reason = status ? `HTTP ${status}` : 'network request failed';
+      void fail(new Error(`Could not load ${fileName} (${reason}). Make sure the images and vendor folders are uploaded beside index.html, then reload.`));
+    });
     machine.add_listener('emulator-ready', () => { if (vm === machine) machine.run().catch(fail); });
     machine.add_listener('emulator-started', () => { if (vm === machine) render('running','Machine running · click the display to type'); });
     machine.add_listener('emulator-stopped', () => { if (vm === machine) render('paused','Machine paused'); });
