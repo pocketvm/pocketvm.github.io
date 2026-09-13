@@ -81,6 +81,12 @@ $('accept').onclick = async () => {
   } catch (error) { await fail(error); }
 };
 $('fullscreen').onclick = async () => { try { await $('display').requestFullscreen(); $('display').focus(); } catch (_) { $('message').textContent = 'Fullscreen is unavailable in this browser.'; } };
+$('lock-mouse').onclick = () => {
+  if (!vm || state !== 'running') return;
+  $('display').focus();
+  vm.mouse_set_enabled(true);
+  vm.lock_mouse();
+};
 $('cad').onclick = () => vm?.keyboard_send_scancodes([0x1D,0x38,0x53,0xD3,0xB8,0x9D]);
 $('display').onpointerdown = () => $('display').focus();
 document.addEventListener('focusin', () => { const active = document.activeElement === $('display'); vm?.keyboard_set_enabled(active); vm?.mouse_set_enabled(active); });
