@@ -18,10 +18,10 @@
 <p class="hint">Best for lightweight, 32-bit x86 systems. Modern 64-bit operating systems are not supported.</p>
 </fieldset><button id="start" class="primary">▶ Start machine</button><button id="end" disabled>Power off</button>
 <div class="privacy"><strong>Local by design</strong><p>Your selected image stays on this device. Changes are temporary and are lost when you power off or close the page.</p></div></aside>
-<section class="console" aria-label="Virtual machine console"><div class="toolbar"><span id="machine-name">Display / x86</span><div><button id="pause" disabled>Pause</button><button id="restart" disabled>Restart</button><button id="fullscreen" disabled>Fullscreen</button><button id="lock-mouse">Lock mouse</button></div></div>
+<section class="console" aria-label="Virtual machine console"><div class="toolbar"><span id="machine-name">Display / x86</span><div><button id="pause" disabled>Pause</button><button id="restart" disabled>Restart</button><button id="fullscreen" disabled>Fullscreen</button></div></div>
 <div id="display" tabindex="0" aria-label="Machine display. Click to send keyboard input."><div id="empty"><span class="screen-icon">&gt;_</span><h2>A little computer.<br>A whole lot of possibility.</h2><p>Choose a boot image, then start your machine.</p></div><div id="screen_container" hidden><div style="white-space:pre;font:14px monospace;line-height:14px"></div><canvas style="display:none"></canvas></div></div>
 <div class="console-footer"><span id="message" aria-live="polite">Waiting to boot</span><button id="cad" disabled>Ctrl + Alt + Del</button></div></section>
-</div><footer><span>Click the display to type. Click outside it to release the keyboard.</span><a href="https://github.com/copy/v86" target="_blank" rel="noreferrer">Powered by v86 ↗</a></footer>
+</div><footer><span>Click the display to capture the mouse and keyboard. Press Esc to release the mouse.</span><a href="https://github.com/copy/v86" target="_blank" rel="noreferrer">Powered by v86 ↗</a></footer>
 </main>
 <dialog id="confirm"><h2 id="confirm-title">Power off machine?</h2><p>Unsaved work and changes to the disk will be lost.</p><div class="dialog-actions"><button id="cancel">Cancel</button><button id="accept" class="primary">Power off</button></div></dialog>
 </body></html>
